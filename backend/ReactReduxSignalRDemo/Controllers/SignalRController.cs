@@ -1,23 +1,42 @@
 ﻿using System.Linq;
+using System.Threading;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 using ReactReduxSignalRDemo.Models;
 
 namespace ReactReduxSignalRDemo.Controllers
 {
-    public class SignalRCounter : Hub
+    public class R6StatsSignalR : Hub
     {
-        //private readonly CounterContext _context;
+        private readonly R6StatsContext _context;
+        private static Timer timer;
 
-        //public SignalRCounter(CounterContext context)
-        //{
-        //    _context = context;
-        //}
+        public R6StatsSignalR(R6StatsContext context)
+        {
+            _context = context;
+        }
 
-        //public Task IncrementCounter()
-        //{
-        //    return Clients.All.SendAsync("IncrementCounter", UpdateCount(true));
-        //}
+        public Task GetLiveStats(int userId)
+        {
+            var stats = _context.Stats.Find(userId);
+
+            if (stats != null)
+            {
+
+            }
+
+            return Clients.All.SendAsync("GetLiveStats");
+        }
+
+        private void SimulateMatch(int userId)
+        {
+            timer = new Timer(TimerTask, null, 0, 10000);
+        }
+
+        private static void TimerTask(object timerState)
+        {
+
+        }
 
         //public Task DecrementCounter()
         //{

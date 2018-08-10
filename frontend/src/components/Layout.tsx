@@ -1,7 +1,6 @@
 import * as React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import {
@@ -10,6 +9,7 @@ import {
   withStyles,
   WithStyles
   } from '@material-ui/core/styles';
+// import Paper from '@material-ui/core/Paper';
 
 type Props = WithStyles<typeof styles>;
 
@@ -30,14 +30,14 @@ const Layout: React.SFC<Props> = ({ children, classes }) => (
     <AppBar position="static">
       <Toolbar>
         <Typography variant="title" color="inherit">
-          Counter
+          R6 Stats
         </Typography>
       </Toolbar>
     </AppBar>
     <div className={classes.root}>
-      <Grid container justify="center" spacing={24}>
-        <Grid item xs={8}>
-          <Paper className={classes.paper}>{children}</Paper>
+      <Grid container justify="center">
+        <Grid item xs={3}>
+          {children}
         </Grid>
       </Grid>
     </div>

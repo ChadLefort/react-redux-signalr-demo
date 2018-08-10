@@ -32,7 +32,7 @@ namespace ReactReduxSignalRDemo.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = _context.Users.Where(x => x.UserId == id).Include(x => x.Stats);
+            var user = _context.Users.Where(x => x.UserId == id).Include(x => x.Stats).FirstOrDefault();
 
             if (user == null)
             {

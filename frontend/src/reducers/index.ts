@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import { reducer as counter, State as CounterState } from './counter';
+import { reducer as user, State as UserState } from './user';
 
 export type RootState = {
-  counter: CounterState;
+  user: UserState;
 };
 
 export default combineReducers<RootState>({
-  counter
+  user
 });

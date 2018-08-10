@@ -4,7 +4,7 @@
   "private": true,
   "proxy": {
     "/api": {
-      "target": "http://localhost:60930"
+      "target": "http://localhost:5000"
     }
   },
   "scripts": {
@@ -20,6 +20,7 @@
   "dependencies": {
     "@aspnet/signalr": "^1.0.2",
     "@material-ui/core": "^1.4.2",
+    "@material-ui/icons": "^2.0.1",
     "axios": "^0.18.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",

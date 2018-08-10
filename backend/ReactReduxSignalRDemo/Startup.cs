@@ -38,7 +38,7 @@ namespace ReactReduxSignalRDemo
             }
 
             app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod().AllowCredentials());
-            app.UseSignalR(routes => routes.MapHub<SignalRCounter>("/signalrCounter"));
+            app.UseSignalR(routes => routes.MapHub<R6StatsSignalR>("/r6stats"));
             app.UseMvc();
         }
     }
