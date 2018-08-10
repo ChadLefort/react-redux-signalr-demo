@@ -23,7 +23,7 @@ namespace ReactReduxSignalRDemo
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSignalR();
-            services.AddDbContext<CounterContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ReactReduxSignalRDemoDatabase")));
+            services.AddDbContext<R6StatsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ReactReduxSignalRDemoDatabase")));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
