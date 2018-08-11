@@ -29,6 +29,7 @@ namespace ReactReduxSignalRDemo
             services.AddSignalR();
             services.AddDbContext<R6StatsContext>(options => options.UseSqlServer(connection));
             services.AddSingleton(Configuration);
+            services.AddScoped<ISimuateMatchRepository, SimuateMatchRepository>();
             services.AddScoped<ISimuateMatchService, SimuateMatchService>();
         }
 
