@@ -1,33 +1,28 @@
 import axios, { AxiosError } from 'axios';
-import { ActionType } from '../reducers/user';
+import hub from '../hub';
+import { ActionType, HubMethod } from '../reducers/user';
+import { IStats } from '../interfaces/stats';
 import { IUser } from '../interfaces/user';
 import { RootState } from '../reducers';
+import { Store } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-// import hub from '../hub';
-// import { Store } from 'redux';
 
-export const increment = (payload: number) => ({
-  type: ActionType.INCREMENT_USER as typeof ActionType.INCREMENT_USER,
+export const getLiveStats = (payload: IStats) => ({
+  type: ActionType.GET_LIVE_STATS as typeof ActionType.GET_LIVE_STATS,
   payload
 });
 
-export const decrement = (payload: number) => ({
-  type: ActionType.DECREMENT_USER as typeof ActionType.DECREMENT_USER,
-  payload
-});
+export const startFetchMatch = (userId: number): ThunkAction<void, RootState, null, Action> => () =>
+  hub.invoke(HubMethod.StartFetchMatch, userId);
 
-// export const incrementUser = (): ThunkAction<void, RootState, null, Action> => () =>
-//   hub.invoke(HubMethod.IncrementUserer);
+export const signalRRegisterCommands = async (store: Store, cb: () => void) => {
+  hub.on(HubMethod.OnConnected, connectionId => console.log(`${connectionId} has connected to SignalR Hub.`));
+  hub.on(HubMethod.OnDisconnected, connectionId => console.log(`${connectionId} has disconnected to SignalR Hub.`));
+  hub.on(HubMethod.GetLiveStats, payload => store.dispatch(getLiveStats(payload)));
 
-// export const decrementUser = (): ThunkAction<void, RootState, null, Action> => () =>
-//   hub.invoke(HubMethod.DecrementUserer);
-
-// export const signalRRegisterCommands = async (store: Store, cb: () => void) => {
-//   hub.on(HubMethod.IncrementUserer, ({ user }) => store.dispatch(increment(user)));
-//   hub.on(HubMethod.DecrementUserer, ({ user }) => store.dispatch(decrement(user)));
-//   await hub.start();
-//   cb();
-// };
+  await hub.start();
+  cb();
+};
 
 export const fetchUserRequest = () => ({
   type: ActionType.FETCH_USER_REQUEST as typeof ActionType.FETCH_USER_REQUEST
@@ -60,8 +55,7 @@ export const fetchUser = (userId: number): ThunkAction<Promise<IUser>, RootState
 };
 
 export type Action =
-  | ReturnType<typeof increment>
-  | ReturnType<typeof decrement>
+  | ReturnType<typeof getLiveStats>
   | ReturnType<typeof fetchUserRequest>
   | ReturnType<typeof fetchUserSuccess>
   | ReturnType<typeof fetchUserFailure>;

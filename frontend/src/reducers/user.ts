@@ -3,16 +3,17 @@ import { AxiosError } from 'axios';
 import { IUser } from '../interfaces/user';
 
 export enum ActionType {
-  INCREMENT_USER = 'INCREMENT_USER',
-  DECREMENT_USER = 'DECREMENT_USER',
+  GET_LIVE_STATS = 'GET_LIVE_STATS',
   FETCH_USER_REQUEST = 'FETCH_USER_REQUEST',
   FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS',
   FETCH_USER_FAILURE = 'FETCH_USER_FAILURE'
 }
 
 export enum HubMethod {
-  IncrementCounter = 'IncrementCounter',
-  DecrementCounter = 'DecrementCounter'
+  OnConnected = 'OnConnected',
+  OnDisconnected = 'OnDisconnected',
+  StartFetchMatch = 'StartFetchMatch',
+  GetLiveStats = 'GetLiveStats'
 }
 
 export type State = {
@@ -29,16 +30,11 @@ export const initialState: State = {
 
 export function reducer(state: State = initialState, action: Action): State {
   switch (action.type) {
-    // case ActionType.INCREMENT_USER:
-    //   return {
-    //     ...state,
-    //     user: action.payload
-    //   };
-    // case ActionType.DECREMENT_USER:
-    //   return {
-    //     ...state,
-    //     user: action.payload
-    //   };
+    case ActionType.GET_LIVE_STATS:
+      return {
+        ...state,
+        user: { ...state.user, stats: action.payload } as IUser
+      };
     case ActionType.FETCH_USER_REQUEST:
       return {
         ...state,

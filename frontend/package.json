@@ -5,6 +5,10 @@
   "proxy": {
     "/api": {
       "target": "http://localhost:5000"
+    },
+    "/r6stats": {
+      "target": "http://localhost:5000",
+      "ws": true
     }
   },
   "scripts": {

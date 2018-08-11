@@ -1,5 +1,5 @@
 import * as SignalR from '@aspnet/signalr';
 
-const connection = new SignalR.HubConnectionBuilder().withUrl('http://localhost:60930/signalrCounter').build();
+const connection = new SignalR.HubConnectionBuilder().withUrl('/r6stats').build();
 
 export default connection;
