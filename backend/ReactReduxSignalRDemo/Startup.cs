@@ -4,9 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using ReactReduxSignalRDemo.Controllers;
+using ReactReduxSignalRDemo.Hubs;
+using ReactReduxSignalRDemo.Interfaces;
 using ReactReduxSignalRDemo.Models;
+using ReactReduxSignalRDemo.Services;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace ReactReduxSignalRDemo
@@ -22,11 +23,13 @@ namespace ReactReduxSignalRDemo
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection = Configuration.GetConnectionString("ReactReduxSignalRDemoDatabase");
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSignalR();
-            services.AddDbContext<R6StatsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ReactReduxSignalRDemoDatabase")));
+            services.AddDbContext<R6StatsContext>(options => options.UseSqlServer(connection));
             services.AddSingleton(Configuration);
+            services.AddScoped<ISimuateMatchService, SimuateMatchService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -41,7 +44,7 @@ namespace ReactReduxSignalRDemo
             }
 
             app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod().AllowCredentials());
-            app.UseSignalR(routes => routes.MapHub<R6StatsSignalR>("/r6stats"));
+            app.UseSignalR(routes => routes.MapHub<R6StatsHub>("/r6stats"));
             app.UseMvc();
         }
     }

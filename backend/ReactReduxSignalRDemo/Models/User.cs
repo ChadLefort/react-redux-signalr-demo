@@ -6,23 +6,6 @@ namespace ReactReduxSignalRDemo.Models
     public class R6StatsContext : DbContext
     {
         public R6StatsContext(DbContextOptions options) : base(options) { }
-
-        public R6StatsContext(string connection)
-        {
-            _connectionString = connection;
-        }
-        private readonly string _connectionString;
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (_connectionString != null)
-            {
-                var config = _connectionString;
-                optionsBuilder.UseSqlServer(config);
-            }
-
-            base.OnConfiguring(optionsBuilder);
-        }
-
         public DbSet<User> Users { get; set; }
         public DbSet<Stats> Stats { get; set; }
 
