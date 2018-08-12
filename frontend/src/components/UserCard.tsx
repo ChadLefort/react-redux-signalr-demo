@@ -8,11 +8,11 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import {
-    createStyles,
-    Theme,
-    withStyles,
-    WithStyles
-    } from '@material-ui/core/styles';
+  createStyles,
+  Theme,
+  withStyles,
+  WithStyles
+  } from '@material-ui/core/styles';
 import { IUser } from '../interfaces/user';
 
 type Props = WithStyles<typeof styles> & OwnProps;
@@ -24,10 +24,8 @@ type OwnProps = {
 const styles = (theme: Theme) =>
   createStyles({
     card: {
-      minWidth: 275
-    },
-    pos: {
-      marginBottom: 12
+      minWidth: 275,
+      height: '100%'
     }
   });
 
@@ -43,12 +41,9 @@ const UserCard: React.SFC<Props> = ({
       <Typography gutterBottom variant="headline" component="h2">
         User Stats
       </Typography>
-      <Typography className={classes.pos} color="textSecondary">
-        {username}
-      </Typography>
       <Divider />
-      <Grid container>
-        <Grid item xs={6}>
+      <Grid container spacing={24}>
+        <Grid item xs>
           <List component="nav">
             <ListItem>
               <ListItemText primary="Kills" secondary={kills} />
@@ -61,7 +56,7 @@ const UserCard: React.SFC<Props> = ({
             </ListItem>
           </List>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs>
           <List component="nav">
             <ListItem>
               <ListItemText primary="Wins" secondary={wins} />

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
+import logo from '../logo.svg';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import {
@@ -9,7 +10,6 @@ import {
   withStyles,
   WithStyles
   } from '@material-ui/core/styles';
-// import Paper from '@material-ui/core/Paper';
 
 type Props = WithStyles<typeof styles>;
 
@@ -22,6 +22,10 @@ const styles = (theme: Theme) =>
       padding: theme.spacing.unit * 2,
       textAlign: 'center',
       color: theme.palette.text.secondary
+    },
+    logo: {
+      height: '40px',
+      margin: '0 0.5em'
     }
   });
 
@@ -30,13 +34,14 @@ const Layout: React.SFC<Props> = ({ children, classes }) => (
     <AppBar position="static">
       <Toolbar>
         <Typography variant="title" color="inherit">
+          <img src={logo} className={classes.logo} />
           R6 Stats
         </Typography>
       </Toolbar>
     </AppBar>
     <div className={classes.root}>
       <Grid container justify="center">
-        <Grid item xs={3}>
+        <Grid item xs={12}>
           {children}
         </Grid>
       </Grid>

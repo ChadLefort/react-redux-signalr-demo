@@ -1,6 +1,6 @@
 import * as React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import UserCard from '../components/UserCard';
+import Loading from '../components/Loading';
+import UserDashboard from '../components/UserDashboard';
 import { Action, fetchUser, startFetchMatch } from '../actions/user';
 import { connect } from 'react-redux';
 import { RootState } from '../reducers';
@@ -25,7 +25,7 @@ class UserContainer extends React.Component<Props> {
   public render() {
     const { user, isFetching } = this.props;
 
-    return user && !isFetching ? <UserCard user={user} /> : <CircularProgress />;
+    return user && !isFetching ? <UserDashboard user={user} /> : <Loading />;
   }
 }
 

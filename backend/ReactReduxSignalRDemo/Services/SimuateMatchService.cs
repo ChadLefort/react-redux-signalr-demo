@@ -27,7 +27,7 @@ namespace ReactReduxSignalRDemo.Services
             if (stats != null)
             {
                 var timerState = new MatchTimerState { Stats = stats };
-                _killDeathTimer = new Timer(KillDeathTimerTask, timerState, 0, 10000);
+                _killDeathTimer = new Timer(KillDeathTimerTask, timerState, 0, 1000);
                 _winLossTimer = new Timer(WinLossTimerTask, timerState, 0, 30000);
             }
         }
