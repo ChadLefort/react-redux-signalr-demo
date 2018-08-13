@@ -2,10 +2,44 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": ".NET Core Launch (web)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/backend/ReactReduxSignalRDemo/bin/Debug/netcoreapp2.1/ReactReduxSignalRDemo.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/backend/ReactReduxSignalRDemo",
+      "stopAtEntry": false,
+      "internalConsoleOptions": "openOnSessionStart",
+      "launchBrowser": {
+        "enabled": true,
+        "args": "${auto-detect-url}",
+        "windows": {
+          "command": "cmd.exe",
+          "args": "/C start ${auto-detect-url}"
+        },
+        "osx": {
+          "command": "open"
+        },
+        "linux": {
+          "command": "xdg-open"
+        }
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
+    },
+    {
       "name": "Debug Jest Tests",
       "type": "node",
       "request": "launch",
-      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/react-scripts-ts",
+      "runtimeExecutable": "${workspaceRoot}/frontend/node_modules/.bin/react-scripts-ts",
       "args": ["test", "--runInBand", "--no-cache", "--env=jsdom"],
       "cwd": "${workspaceRoot}",
       "protocol": "inspector",
