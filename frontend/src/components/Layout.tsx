@@ -41,7 +41,7 @@ const Layout: React.SFC<Props> = ({ children, classes }) => (
     </AppBar>
     <div className={classes.root}>
       <Grid container justify="center">
-        <Grid item xs={12}>
+        <Grid item xs>
           {children}
         </Grid>
       </Grid>
