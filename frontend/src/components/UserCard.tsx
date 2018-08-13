@@ -1,6 +1,9 @@
 import * as React from 'react';
+import attacker from '../assets/operators/twitch.svg';
+import Avatar from '@material-ui/core/Avatar';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import defender from '../assets/operators/lesion.svg';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
@@ -26,6 +29,9 @@ const styles = (theme: Theme) =>
     card: {
       minWidth: 275,
       height: '100%'
+    },
+    icon: {
+      borderRadius: 0
     }
   });
 
@@ -43,7 +49,7 @@ const UserCard: React.SFC<Props> = ({
       </Typography>
       <Divider />
       <Grid container spacing={24}>
-        <Grid item xs>
+        <Grid item xs={6}>
           <List component="nav">
             <ListItem>
               <ListItemText primary="Kills" secondary={kills} />
@@ -54,9 +60,13 @@ const UserCard: React.SFC<Props> = ({
             <ListItem>
               <ListItemText primary="K/D Ratio" secondary={killDeathRatio} />
             </ListItem>
+            <ListItem>
+              <Avatar alt="Twitch" src={attacker} className={classes.icon} />
+              <ListItemText primary="Attacker" secondary="Twitch" />
+            </ListItem>
           </List>
         </Grid>
-        <Grid item xs>
+        <Grid item xs={6}>
           <List component="nav">
             <ListItem>
               <ListItemText primary="Wins" secondary={wins} />
@@ -66,6 +76,10 @@ const UserCard: React.SFC<Props> = ({
             </ListItem>
             <ListItem>
               <ListItemText primary="W/L Ratio" secondary={winLossRatio} />
+            </ListItem>
+            <ListItem>
+              <Avatar alt="Lesion" src={defender} className={classes.icon} />
+              <ListItemText primary="Defender" secondary="Lesion" />
             </ListItem>
           </List>
         </Grid>

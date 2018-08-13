@@ -1,0 +1,23 @@
+export enum Defender {
+  Smoke,
+  Mute,
+  Castle,
+  Pulse,
+  Doc,
+  Rook,
+  Kapkan,
+  Tachanka,
+  Jäger,
+  Bandit,
+  Frost,
+  Valkyrie,
+  Caveira,
+  Echo,
+  Mira,
+  Lesion,
+  Ela,
+  Vigil,
+  Maestro,
+  Alibi,
+  Recruit
+}

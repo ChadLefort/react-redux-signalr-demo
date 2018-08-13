@@ -5,7 +5,7 @@ namespace ReactReduxSignalRDemo.Models
 
     public class R6StatsContext : DbContext
     {
-        public R6StatsContext(DbContextOptions options) : base(options) { }
+        public R6StatsContext(DbContextOptions<R6StatsContext> options) : base(options) { }
         public DbSet<User> Users { get; set; }
         public DbSet<Stats> Stats { get; set; }
 

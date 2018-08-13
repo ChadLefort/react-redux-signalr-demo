@@ -17,7 +17,7 @@ export const startFetchMatch = (userId: number): ThunkAction<void, RootState, nu
 
 export const signalRRegisterCommands = async (store: Store, cb: () => void) => {
   hub.on(HubMethod.OnConnected, connectionId => console.log(`${connectionId} has connected to SignalR Hub.`));
-  hub.on(HubMethod.OnDisconnected, connectionId => console.log(`${connectionId} has disconnected to SignalR Hub.`));
+  hub.on(HubMethod.OnDisconnected, connectionId => console.log(`${connectionId} has disconnected from SignalR Hub.`));
   hub.on(HubMethod.GetLiveStats, payload => store.dispatch(getLiveStats(payload)));
 
   await hub.start();

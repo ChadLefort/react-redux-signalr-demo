@@ -4,6 +4,7 @@ import store from './store';
 import UserContainer from './containers/User';
 import withRoot from './withRoot';
 import { Provider } from 'react-redux';
+import 'typeface-roboto';
 
 const App: React.SFC = () => (
   <Provider store={store}>

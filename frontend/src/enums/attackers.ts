@@ -1,0 +1,23 @@
+export enum Attacker {
+  Sledge,
+  Thatcher,
+  Ash,
+  Thermite,
+  Twitch,
+  Montagne,
+  Glaz,
+  Fuze,
+  Blitz,
+  IQ,
+  Buck,
+  Blackbeard,
+  Capitão,
+  Hibana,
+  Jackal,
+  Ying,
+  Zofia,
+  Dokkaebi,
+  Lion,
+  Finka,
+  Recruit
+}

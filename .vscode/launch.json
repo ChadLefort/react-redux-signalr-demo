@@ -11,8 +11,11 @@
       "cwd": "${workspaceFolder}/backend/ReactReduxSignalRDemo",
       "stopAtEntry": false,
       "internalConsoleOptions": "openOnSessionStart",
+      "logging": {
+        "moduleLoad": false
+      },
       "launchBrowser": {
-        "enabled": true,
+        "enabled": false,
         "args": "${auto-detect-url}",
         "windows": {
           "command": "cmd.exe",
