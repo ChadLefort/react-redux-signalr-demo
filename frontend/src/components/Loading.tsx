@@ -1,15 +1,10 @@
 import * as React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {
-    createStyles,
-    Theme,
-    withStyles,
-    WithStyles
-    } from '@material-ui/core/styles';
+import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles';
 
 type Props = WithStyles<typeof styles>;
 
-const styles = (theme: Theme) =>
+const styles = () =>
   createStyles({
     root: {
       display: 'flex',

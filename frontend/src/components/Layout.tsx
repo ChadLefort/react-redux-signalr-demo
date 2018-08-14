@@ -1,18 +1,12 @@
 import * as React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
-import logo from '../assets/logo.svg';
 import Toolbar from '@material-ui/core/Toolbar';
-import {
-  createStyles,
-  Theme,
-  withStyles,
-  WithStyles
-  } from '@material-ui/core/styles';
+import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles';
 
 type Props = WithStyles<typeof styles>;
 
-const styles = (theme: Theme) =>
+const styles = () =>
   createStyles({
     root: {
       flexGrow: 1
@@ -26,7 +20,7 @@ const Layout: React.SFC<Props> = ({ children, classes }) => (
   <React.Fragment>
     <AppBar position="static">
       <Toolbar>
-        <img src={logo} className={classes.logo} />
+        <img src={`${process.env.PUBLIC_URL}/assets/logo.svg`} className={classes.logo} />
       </Toolbar>
     </AppBar>
     <div className={classes.root}>

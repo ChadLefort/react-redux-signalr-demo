@@ -20,6 +20,7 @@ namespace ReactReduxSignalRDemo.Controllers
         [HttpGet]
         public IEnumerable<KillFeed> GetKillFeeds()
         {
+            // @TODO: Reverse sorting here
             return _context.KillFeeds.
                 Include(x => x.KillFeedItems)
                 .ThenInclude(x => x.Kill)
@@ -39,12 +40,15 @@ namespace ReactReduxSignalRDemo.Controllers
                 .Include(x => x.KillFeedItems)
                 .ThenInclude(x => x.Kill)
                 .Include(x => x.KillFeedItems)
-                .ThenInclude(x => x.Death);
-
+                .ThenInclude(x => x.Death)
+                .FirstOrDefault();
+            
             if (killFeed == null)
             {
                 return NotFound();
             }
+
+            killFeed.KillFeedItems = killFeed.KillFeedItems.Reverse();
 
             return Ok(killFeed);
         }

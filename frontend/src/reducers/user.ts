@@ -10,8 +10,6 @@ export enum ActionType {
 }
 
 export enum HubMethod {
-  OnConnected = 'OnConnected',
-  OnDisconnected = 'OnDisconnected',
   StartFetchMatch = 'StartFetchMatch',
   GetLiveStats = 'GetLiveStats'
 }

@@ -8,21 +8,21 @@ export interface IKillFeed {
   killFeedItems: IKillFeedItem[];
 }
 
-interface IKillFeedItem {
+export interface IKillFeedItem {
   killFeedItemId: number;
   killFeedId: number;
   kill: IKill;
   death: IDeath;
 }
 
-interface IDeath {
+export interface IDeath {
   deathUserId: number;
   killFeedItemId: number;
   username: string;
   operator: Attacker | Defender;
 }
 
-interface IKill {
+export interface IKill {
   killUserId: number;
   killFeedItemId: number;
   username: string;

@@ -103,7 +103,7 @@ namespace ReactReduxSignalRDemo.Services
                 _simuateMatchRepository.UpdateStats(state.User.Stats);
                 _simuateMatchRepository.AddKillFeedItem(killFeedItem);
                 _hubContext.Clients.All.SendAsync("GetLiveStats", state.User.Stats);
-                _hubContext.Clients.All.SendAsync("GetKillFeedItem", killFeedItem);
+                _hubContext.Clients.All.SendAsync("GetLiveKillFeed", killFeedItem);
             }
         }
 

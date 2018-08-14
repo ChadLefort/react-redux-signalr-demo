@@ -1,14 +1,9 @@
 import * as React from 'react';
-import {
-  createStyles,
-  Theme,
-  withStyles,
-  WithStyles
-  } from '@material-ui/core/styles';
+import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles';
 
 type Props = WithStyles<typeof styles>;
 
-const styles = (theme: Theme) =>
+const styles = () =>
   createStyles({
     map: {
       borderRadius: '4px',
@@ -18,7 +13,7 @@ const styles = (theme: Theme) =>
   });
 
 const MapCard: React.SFC<Props> = ({ classes }) => (
-  <img src={`${process.env.PUBLIC_URL}/images/maps/coastline.png`} className={classes.map} />
+  <img src={`${process.env.PUBLIC_URL}/assets/images/maps/coastline.png`} className={classes.map} />
 );
 
 export default withStyles(styles)(MapCard);

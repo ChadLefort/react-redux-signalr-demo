@@ -15,15 +15,8 @@ export const getLiveStats = (payload: IStats) => ({
 export const startFetchMatch = (userId: number, matchId: number): ThunkAction<void, RootState, null, Action> => () =>
   hub.invoke(HubMethod.StartFetchMatch, userId, matchId);
 
-export const signalRRegisterCommands = async (store: Store, cb: () => void) => {
-  hub.on(HubMethod.OnConnected, connectionId => console.log(`${connectionId} has connected to SignalR Hub.`));
-  hub.on(HubMethod.OnDisconnected, connectionId => console.log(`${connectionId} has disconnected from SignalR Hub.`));
+export const signalRCommands = (store: Store) =>
   hub.on(HubMethod.GetLiveStats, payload => store.dispatch(getLiveStats(payload)));
-  hub.on('GetKillFeedItem', data => console.log(data));
-
-  await hub.start();
-  cb();
-};
 
 export const fetchUserRequest = () => ({
   type: ActionType.FETCH_USER_REQUEST as typeof ActionType.FETCH_USER_REQUEST

@@ -4,12 +4,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import {
-  createStyles,
-  Theme,
-  withStyles,
-  WithStyles
-  } from '@material-ui/core/styles';
+import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles';
 import { IUser } from '../interfaces/user';
 import {
   VictoryBar,
@@ -24,7 +19,7 @@ type OwnProps = {
   user: IUser;
 };
 
-const styles = (theme: Theme) =>
+const styles = () =>
   createStyles({
     card: {
       minWidth: 275,

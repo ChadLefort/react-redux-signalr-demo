@@ -1,25 +1,22 @@
 import * as React from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
-import ForwardIcon from '@material-ui/icons/Forward';
+import KillFeedItem from './KillFeedItem';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import {
-  createStyles,
-  Theme,
-  withStyles,
-  WithStyles
-  } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
-import { Lesion, Twitch } from '../assets/operators';
+import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles';
+import { IKillFeed } from '../interfaces/killFeed';
+import { IOperator } from '../interfaces/operator';
 
-type Props = WithStyles<typeof styles>;
+type Props = WithStyles<typeof styles> & OwnProps;
 
-const styles = (theme: Theme) =>
+type OwnProps = {
+  killFeed: IKillFeed;
+  operators: IOperator[];
+};
+
+const styles = () =>
   createStyles({
     root: {
       position: 'relative',
@@ -31,67 +28,36 @@ const styles = (theme: Theme) =>
       minWidth: 275,
       height: '100%'
     },
-    icon: {
-      borderRadius: 0
-    },
     item: {
       paddingLeft: 0,
       paddingRight: 0
     }
   });
 
-const killFeed = [
-  { killer: 'chad', death: 'Gully-Foyle' },
-  { killer: 'chad', death: 'JC' },
-  { killer: 'Ollidar', death: 'chad' },
-  { killer: 'chad', death: 'ITServices' },
-  { killer: 'Refrige', death: 'chad' },
-  { killer: 'Gully-Foyle', death: 'chad' },
-  { killer: 'chad', death: 'Parnasas_' },
-  { killer: 'chad', death: 'Gully-Foyle' },
-  { killer: 'chad', death: 'JC' },
-  { killer: 'Ollidar', death: 'chad' },
-  { killer: 'chad', death: 'ITServices' },
-  { killer: 'Refrige', death: 'chad' },
-  { killer: 'Gully-Foyle', death: 'chad' },
-  { killer: 'chad', death: 'Parnasas_' }
-];
+class KillFeedCard extends React.Component<Props> {
+  public render() {
+    const {
+      classes,
+      killFeed: { killFeedItems },
+      operators
+    } = this.props;
 
-const KillFeedCard: React.SFC<Props> = ({ classes }) => (
-  <Card className={classes.card}>
-    <CardContent>
-      <Typography gutterBottom variant="headline" component="h2">
-        Kill Feed
-      </Typography>
-      <Divider />
-      <List component="nav" className={classes.root}>
-        {killFeed.map(({ killer, death }, index) => (
-          <React.Fragment key={index}>
-            <Grid container justify="center" alignItems="center">
-              <Grid item md={5}>
-                <ListItem disableGutters>
-                  <Avatar alt="Twitch" src={Twitch} className={classes.icon} />
-                  <ListItemText primary={killer} />
-                </ListItem>
-              </Grid>
-              <Grid item md={2}>
-                <Avatar>
-                  <ForwardIcon />
-                </Avatar>
-              </Grid>
-              <Grid item md={5}>
-                <ListItem disableGutters>
-                  <Avatar alt="Lesion" src={Lesion} className={classes.icon} />
-                  <ListItemText primary={death} />
-                </ListItem>
-              </Grid>
-            </Grid>
-            <Divider />
-          </React.Fragment>
-        ))}
-      </List>
-    </CardContent>
-  </Card>
-);
+    return (
+      <Card className={classes.card}>
+        <CardContent>
+          <Typography gutterBottom variant="headline" component="h2">
+            Kill Feed
+          </Typography>
+          <Divider />
+          <List component="nav" className={classes.root}>
+            {killFeedItems.map(({ killFeedItemId, kill, death }) => (
+              <KillFeedItem key={killFeedItemId} kill={kill} death={death} operators={operators} />
+            ))}
+          </List>
+        </CardContent>
+      </Card>
+    );
+  }
+}
 
 export default withStyles(styles)(KillFeedCard);
