@@ -12,13 +12,14 @@ export const getLiveStats = (payload: IStats) => ({
   payload
 });
 
-export const startFetchMatch = (userId: number): ThunkAction<void, RootState, null, Action> => () =>
-  hub.invoke(HubMethod.StartFetchMatch, userId);
+export const startFetchMatch = (userId: number, matchId: number): ThunkAction<void, RootState, null, Action> => () =>
+  hub.invoke(HubMethod.StartFetchMatch, userId, matchId);
 
 export const signalRRegisterCommands = async (store: Store, cb: () => void) => {
   hub.on(HubMethod.OnConnected, connectionId => console.log(`${connectionId} has connected to SignalR Hub.`));
   hub.on(HubMethod.OnDisconnected, connectionId => console.log(`${connectionId} has disconnected from SignalR Hub.`));
   hub.on(HubMethod.GetLiveStats, payload => store.dispatch(getLiveStats(payload)));
+  hub.on('GetKillFeedItem', data => console.log(data));
 
   await hub.start();
   cb();

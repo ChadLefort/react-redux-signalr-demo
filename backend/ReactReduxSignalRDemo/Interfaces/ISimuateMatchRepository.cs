@@ -4,7 +4,9 @@ namespace ReactReduxSignalRDemo.Interfaces
 {
     public interface ISimuateMatchRepository
     {
-        Stats GetStats(int userId);
+        User GetUser(int userId);
+        KillFeed GetKillFeed(int userId, int matchId);
         void UpdateStats(Stats stats);
+        void AddKillFeedItem(KillFeedItem killFeedItem);
     }
 }

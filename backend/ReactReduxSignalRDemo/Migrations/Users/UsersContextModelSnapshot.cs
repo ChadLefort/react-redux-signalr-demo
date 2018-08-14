@@ -2,17 +2,15 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReactReduxSignalRDemo.Models;
 
-namespace ReactReduxSignalRDemo.Migrations
+namespace ReactReduxSignalRDemo.Migrations.Users
 {
-    [DbContext(typeof(R6StatsContext))]
-    [Migration("20180809231704_InitialCreate")]
-    partial class InitialCreate
+    [DbContext(typeof(UsersContext))]
+    partial class UsersContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,6 +30,12 @@ namespace ReactReduxSignalRDemo.Migrations
 
                     b.Property<int>("Losses");
 
+                    b.Property<string>("Rank");
+
+                    b.Property<string>("TopAttacker");
+
+                    b.Property<string>("TopDefender");
+
                     b.Property<int>("UserId");
 
                     b.Property<int>("Wins");
@@ -44,7 +48,7 @@ namespace ReactReduxSignalRDemo.Migrations
                     b.ToTable("Stats");
 
                     b.HasData(
-                        new { StatsId = 1, Deaths = 640, Kills = 850, Losses = 124, UserId = 1, Wins = 131 }
+                        new { StatsId = 1, Deaths = 640, Kills = 1462, Losses = 124, Rank = "Gold One", TopAttacker = "Twitch", TopDefender = "Lesion", UserId = 1, Wins = 384 }
                     );
                 });
 
@@ -61,13 +65,13 @@ namespace ReactReduxSignalRDemo.Migrations
                     b.ToTable("Users");
 
                     b.HasData(
-                        new { UserId = 1, Username = "chad" }
+                        new { UserId = 1, Username = "Chad" }
                     );
                 });
 
             modelBuilder.Entity("ReactReduxSignalRDemo.Models.Stats", b =>
                 {
-                    b.HasOne("ReactReduxSignalRDemo.Models.User", "User")
+                    b.HasOne("ReactReduxSignalRDemo.Models.User")
                         .WithOne("Stats")
                         .HasForeignKey("ReactReduxSignalRDemo.Models.Stats", "UserId")
                         .OnDelete(DeleteBehavior.Cascade);

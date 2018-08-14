@@ -10,9 +10,9 @@ namespace ReactReduxSignalRDemo.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly R6StatsContext _context;
+        private readonly UsersContext _context;
 
-        public UsersController(R6StatsContext context)
+        public UsersController(UsersContext context)
         {
             _context = context;
         }

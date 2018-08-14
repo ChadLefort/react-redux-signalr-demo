@@ -1,9 +1,7 @@
 import * as React from 'react';
-import attacker from '../assets/operators/twitch.svg';
 import Avatar from '@material-ui/core/Avatar';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import defender from '../assets/operators/lesion.svg';
 import Divider from '@material-ui/core/Divider';
 import ForwardIcon from '@material-ui/icons/Forward';
 import List from '@material-ui/core/List';
@@ -17,6 +15,7 @@ import {
   WithStyles
   } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
+import { Lesion, Twitch } from '../assets/operators';
 
 type Props = WithStyles<typeof styles>;
 
@@ -71,7 +70,7 @@ const KillFeedCard: React.SFC<Props> = ({ classes }) => (
             <Grid container justify="center" alignItems="center">
               <Grid item md={5}>
                 <ListItem disableGutters>
-                  <Avatar alt="Twitch" src={attacker} className={classes.icon} />
+                  <Avatar alt="Twitch" src={Twitch} className={classes.icon} />
                   <ListItemText primary={killer} />
                 </ListItem>
               </Grid>
@@ -82,7 +81,7 @@ const KillFeedCard: React.SFC<Props> = ({ classes }) => (
               </Grid>
               <Grid item md={5}>
                 <ListItem disableGutters>
-                  <Avatar alt="Lesion" src={defender} className={classes.icon} />
+                  <Avatar alt="Lesion" src={Lesion} className={classes.icon} />
                   <ListItemText primary={death} />
                 </ListItem>
               </Grid>

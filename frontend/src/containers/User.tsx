@@ -12,14 +12,14 @@ const mapStateToProps = (state: RootState) => state.user;
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, null, Action>) => ({
   fetchUser: (userId: number) => dispatch(fetchUser(userId)),
-  startFetchMatch: (userId: number) => dispatch(startFetchMatch(userId))
+  startFetchMatch: (userId: number, matchId: number) => dispatch(startFetchMatch(userId, matchId))
 });
 
 class UserContainer extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
     props.fetchUser(1);
-    props.startFetchMatch(1);
+    props.startFetchMatch(1, 1);
   }
 
   public render() {

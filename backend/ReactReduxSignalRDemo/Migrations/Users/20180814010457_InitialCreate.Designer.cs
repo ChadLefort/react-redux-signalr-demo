@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReactReduxSignalRDemo.Models;
 
-namespace ReactReduxSignalRDemo.Migrations
+namespace ReactReduxSignalRDemo.Migrations.Users
 {
-    [DbContext(typeof(R6StatsContext))]
-    [Migration("20180809234131_MoreSeedData")]
-    partial class MoreSeedData
+    [DbContext(typeof(UsersContext))]
+    [Migration("20180814010457_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,12 @@ namespace ReactReduxSignalRDemo.Migrations
 
                     b.Property<int>("Losses");
 
+                    b.Property<string>("Rank");
+
+                    b.Property<string>("TopAttacker");
+
+                    b.Property<string>("TopDefender");
+
                     b.Property<int>("UserId");
 
                     b.Property<int>("Wins");
@@ -44,8 +50,7 @@ namespace ReactReduxSignalRDemo.Migrations
                     b.ToTable("Stats");
 
                     b.HasData(
-                        new { StatsId = 1, Deaths = 640, Kills = 850, Losses = 124, UserId = 1, Wins = 131 },
-                        new { StatsId = 2, Deaths = 265, Kills = 1086, Losses = 58, UserId = 2, Wins = 252 }
+                        new { StatsId = 1, Deaths = 640, Kills = 1462, Losses = 124, Rank = "Gold One", TopAttacker = "Twitch", TopDefender = "Lesion", UserId = 1, Wins = 384 }
                     );
                 });
 
@@ -62,8 +67,7 @@ namespace ReactReduxSignalRDemo.Migrations
                     b.ToTable("Users");
 
                     b.HasData(
-                        new { UserId = 1, Username = "chad" },
-                        new { UserId = 2, Username = "pat" }
+                        new { UserId = 1, Username = "Chad" }
                     );
                 });
 

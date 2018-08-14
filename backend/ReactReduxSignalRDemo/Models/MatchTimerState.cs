@@ -3,6 +3,7 @@ namespace ReactReduxSignalRDemo.Models
 {
     public class MatchTimerState
     {
-        public Stats Stats;
+        public User User { get; set; }
+        public KillFeed KillFeed { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 {
     public interface ISimuateMatchService
     {
-        void StartMatch(int userId);
+        void StartMatch(int userId, int matchId);
         void StopMatch();
     }
 }

@@ -10,9 +10,9 @@ namespace ReactReduxSignalRDemo.Controllers
     [ApiController]
     public class KillFeedsController : ControllerBase
     {
-        private readonly R6KillFeedContext _context;
+        private readonly KillFeedsContext _context;
 
-        public KillFeedsController(R6KillFeedContext context)
+        public KillFeedsController(KillFeedsContext context)
         {
             _context = context;
         }

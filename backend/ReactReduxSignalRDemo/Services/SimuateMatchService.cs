@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
@@ -23,22 +24,23 @@ namespace ReactReduxSignalRDemo.Services
             _logger = logger;
         }
 
-        public void StartMatch(int userId)
+        public void StartMatch(int userId, int matchId)
         {
             _logger.LogInformation($"Start simulated match for user {userId}.");
-            var stats = _simuateMatchRepository.GetStats(userId);
+            var user = _simuateMatchRepository.GetUser(userId);
+            var killFeed = _simuateMatchRepository.GetKillFeed(userId, matchId);
 
-            if (stats != null)
+            if (user != null && killFeed != null)
             {
-                var timerState = new MatchTimerState { Stats = stats };
-                _killDeathTimer = new Timer(KillDeathTimerTask, timerState, 0, 1000);
+                var timerState = new MatchTimerState { User = user, KillFeed = killFeed };
+                _killDeathTimer = new Timer(KillDeathTimerTask, timerState, 0, 10000);
                 _winLossTimer = new Timer(WinLossTimerTask, timerState, 0, 30000);
             }
         }
 
         public void StopMatch()
         {
-            _logger.LogInformation($"Stop simulated match.");
+            _logger.LogInformation("Stop simulated match.");
             _killDeathTimer.Dispose();
             _winLossTimer.Dispose();
         }
@@ -47,19 +49,61 @@ namespace ReactReduxSignalRDemo.Services
         {
             if (timerState is MatchTimerState state)
             {
+                var user = new KillFeedPlayer { Username = state.User.Username, Operator = "Ash" };
+                var enemies = new List<KillFeedPlayer>
+                {
+                    new KillFeedPlayer { Username = "Gully", Operator = "Mira" },
+                    new KillFeedPlayer { Username = "ITServices", Operator = "Smoke" },
+                    new KillFeedPlayer { Username = "JCrafter99", Operator = "Doc" },
+                    new KillFeedPlayer { Username = "Refridge", Operator = "Vigil" },
+                    new KillFeedPlayer { Username = "Parnasas", Operator = "Maestro" }
+                };
+
                 var random = new Random();
+                var randomNumber = random.Next(0, 4);
+                var killFeedItem = new KillFeedItem { KillFeedId = state.KillFeed.KillFeedId };
 
                 if (random.Next(0, 2) == 0)
                 {
-                    state.Stats.Kills++;
+                    state.User.Stats.Kills++;
+
+                    killFeedItem.Kill = new KillUser
+                    {
+                        KillFeedItemId = killFeedItem.KillFeedItemId,
+                        Username = user.Username,
+                        Operator = user.Operator
+                    };
+
+                    killFeedItem.Death = new DeathUser
+                    {
+                        KillFeedItemId = killFeedItem.KillFeedItemId,
+                        Username = enemies[randomNumber].Username,
+                        Operator = enemies[randomNumber].Operator
+                    };
                 }
                 else
                 {
-                    state.Stats.Deaths++;
+                    state.User.Stats.Deaths++;
+
+                    killFeedItem.Kill = new KillUser
+                    {
+                        KillFeedItemId = killFeedItem.KillFeedItemId,
+                        Username = enemies[randomNumber].Username,
+                        Operator = enemies[randomNumber].Operator
+                    };
+
+                    killFeedItem.Death = new DeathUser
+                    {
+                        KillFeedItemId = killFeedItem.KillFeedItemId,
+                        Username = user.Username,
+                        Operator = user.Operator
+                    };
                 }
 
-                _simuateMatchRepository.UpdateStats(state.Stats);
-                _hubContext.Clients.All.SendAsync("GetLiveStats", state.Stats);
+                _simuateMatchRepository.UpdateStats(state.User.Stats);
+                _simuateMatchRepository.AddKillFeedItem(killFeedItem);
+                _hubContext.Clients.All.SendAsync("GetLiveStats", state.User.Stats);
+                _hubContext.Clients.All.SendAsync("GetKillFeedItem", killFeedItem);
             }
         }
 
@@ -71,15 +115,15 @@ namespace ReactReduxSignalRDemo.Services
 
                 if (random.Next(0, 2) == 0)
                 {
-                    state.Stats.Wins++;
+                    state.User.Stats.Wins++;
                 }
                 else
                 {
-                    state.Stats.Losses++;
+                    state.User.Stats.Losses++;
                 }
 
-                _simuateMatchRepository.UpdateStats(state.Stats);
-                _hubContext.Clients.All.SendAsync("GetLiveStats", state.Stats);
+                _simuateMatchRepository.UpdateStats(state.User.Stats);
+                _hubContext.Clients.All.SendAsync("GetLiveStats", state.User.Stats);
             }
         }
     }

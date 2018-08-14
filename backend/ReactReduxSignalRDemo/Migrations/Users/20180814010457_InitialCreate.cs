@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ReactReduxSignalRDemo.Migrations
+namespace ReactReduxSignalRDemo.Migrations.Users
 {
     public partial class InitialCreate : Migration
     {
@@ -30,7 +30,10 @@ namespace ReactReduxSignalRDemo.Migrations
                     Kills = table.Column<int>(nullable: false),
                     Deaths = table.Column<int>(nullable: false),
                     Wins = table.Column<int>(nullable: false),
-                    Losses = table.Column<int>(nullable: false)
+                    Losses = table.Column<int>(nullable: false),
+                    Rank = table.Column<string>(nullable: true),
+                    TopAttacker = table.Column<string>(nullable: true),
+                    TopDefender = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,12 +49,12 @@ namespace ReactReduxSignalRDemo.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "Username" },
-                values: new object[] { 1, "chad" });
+                values: new object[] { 1, "Chad" });
 
             migrationBuilder.InsertData(
                 table: "Stats",
-                columns: new[] { "StatsId", "Deaths", "Kills", "Losses", "UserId", "Wins" },
-                values: new object[] { 1, 640, 850, 124, 1, 131 });
+                columns: new[] { "StatsId", "Deaths", "Kills", "Losses", "Rank", "TopAttacker", "TopDefender", "UserId", "Wins" },
+                values: new object[] { 1, 640, 1462, 124, "Gold One", "Twitch", "Lesion", 1, 384 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stats_UserId",

@@ -38,13 +38,13 @@ namespace ReactReduxSignalRDemo.Hubs
             await base.OnDisconnectedAsync(exception);
         }
 
-        public Task StartFetchMatch(int userId)
+        public Task StartFetchMatch(int userId, int matchId)
         {
             var simulatedMatchAlready = UserHandler.UserList.FirstOrDefault(x => x.SearchedUserId == userId);
 
             if (simulatedMatchAlready == null)
             {
-                _simuateMatch.StartMatch(userId);
+                _simuateMatch.StartMatch(userId, matchId);
 
                 var connectedUser = UserHandler.UserList.FirstOrDefault(x => x.ConnectionId == Context.ConnectionId);
 

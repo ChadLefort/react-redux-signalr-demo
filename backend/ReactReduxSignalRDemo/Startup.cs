@@ -28,8 +28,9 @@ namespace ReactReduxSignalRDemo
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSignalR();
-            services.AddDbContext<R6StatsContext>(options => options.UseSqlServer(connection));
-            services.AddDbContext<R6KillFeedContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<UsersContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<KillFeedsContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<OperatorsContext>(options => options.UseSqlServer(connection));
             services.AddSingleton(Configuration);
             services.AddScoped<ISimuateMatchRepository, SimuateMatchRepository>();
             services.AddScoped<ISimuateMatchService, SimuateMatchService>();
