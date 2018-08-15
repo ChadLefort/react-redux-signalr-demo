@@ -21,7 +21,7 @@ const styles = () =>
     root: {
       position: 'relative',
       overflow: 'auto',
-      maxHeight: 600,
+      maxHeight: 480,
       margin: '1em 0'
     },
     card: {
