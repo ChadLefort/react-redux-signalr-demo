@@ -1,6 +1,6 @@
 # React Redux SignalR Demo
 
-This is the project used for a presentation on demostrate how set up a basic app with [React](https://reactjs.org/), [Redux](https://redux.js.org/), and [SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/?view=aspnetcore-2.1) using [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-2.1) for the Mandeville Web Development Meetup.
+This is the project used for a presentation on demonstrate how set up a basic app with [React](https://reactjs.org/), [Redux](https://redux.js.org/), and [SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/?view=aspnetcore-2.1) using [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-2.1) for the Mandeville Web Development Meetup.
 
 ## How To:
 
