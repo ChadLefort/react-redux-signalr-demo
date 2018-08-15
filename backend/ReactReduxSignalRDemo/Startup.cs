@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ReactReduxSignalRDemo.Extensions;
 using ReactReduxSignalRDemo.Hubs;
 using ReactReduxSignalRDemo.Interfaces;
 using ReactReduxSignalRDemo.Models;
@@ -50,6 +51,9 @@ namespace ReactReduxSignalRDemo
             app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod().AllowCredentials());
             app.UseSignalR(routes => routes.MapHub<R6StatsHub>("/r6stats"));
             app.UseMvc();
+            app.EnsureMigrationOfContext<UsersContext>();
+            app.EnsureMigrationOfContext<KillFeedsContext>();
+            app.EnsureMigrationOfContext<OperatorsContext>();
         }
     }
 }
