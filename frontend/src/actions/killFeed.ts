@@ -26,7 +26,12 @@ export const fetchKillFeedFailure = (error: AxiosError) => ({
 });
 
 export const signalRCommands = (store: Store) =>
-  hub.on(HubMethod.GetLiveKillFeed, payload => store.dispatch(getLiveKillFeed(payload)));
+  hub.on(HubMethod.GetLiveKillFeed, (payload: IKillFeedItem | null) => {
+    if (payload) {
+      console.log(`Added kill feed item ${payload.killFeedItemId}.`);
+      store.dispatch(getLiveKillFeed(payload));
+    }
+  });
 
 export const fetchKillFeed = (
   killFeedId: number
@@ -40,6 +45,7 @@ export const fetchKillFeed = (
       dispatch(fetchKillFeedSuccess(data));
       resolve(data);
     } catch (error) {
+      console.error(error);
       dispatch(fetchKillFeedFailure(error));
       reject(error);
     }

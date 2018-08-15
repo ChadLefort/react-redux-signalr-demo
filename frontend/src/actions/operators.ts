@@ -31,6 +31,7 @@ const fetchOperators = (): ThunkAction<Promise<IOperator[]>, RootState, null, Ac
       dispatch(fetchOperatorsSuccess(data));
       resolve(data);
     } catch (error) {
+      console.error(error);
       dispatch(fetchOperatorsFailure(error));
       reject(error);
     }

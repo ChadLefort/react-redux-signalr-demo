@@ -6,12 +6,12 @@ using ReactReduxSignalRDemo.Models;
 
 namespace ReactReduxSignalRDemo.Repositories
 {
-    public class SimuateMatchRepository : ISimuateMatchRepository
+    public class SimulateMatchRepository : ISimulateMatchRepository
     {
         private readonly UsersContext _usersContext;
         private readonly KillFeedsContext _killFeedsContext;
         private readonly IConfiguration _configuration;
-        public SimuateMatchRepository(UsersContext usersContext, KillFeedsContext killFeedsContext, IConfiguration configuration)
+        public SimulateMatchRepository(UsersContext usersContext, KillFeedsContext killFeedsContext, IConfiguration configuration)
         {
             _usersContext = usersContext;
             _killFeedsContext = killFeedsContext;

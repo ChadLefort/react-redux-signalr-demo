@@ -12,11 +12,25 @@ export const getLiveStats = (payload: IStats) => ({
   payload
 });
 
-export const startFetchMatch = (userId: number, matchId: number): ThunkAction<void, RootState, null, Action> => () =>
-  hub.invoke(HubMethod.StartFetchMatch, userId, matchId);
+export const startFetchMatch = (
+  userId: number,
+  matchId: number
+): ThunkAction<void, RootState, null, Action> => async () => {
+  try {
+    await hub.invoke(HubMethod.StartFetchMatch, userId, matchId);
+    console.log(`Attempting to simulate match for user ${userId} and match ${matchId}.`);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const signalRCommands = (store: Store) =>
-  hub.on(HubMethod.GetLiveStats, payload => store.dispatch(getLiveStats(payload)));
+  hub.on(HubMethod.GetLiveStats, (payload: IStats | null) => {
+    if (payload) {
+      console.log(`Updated stats for user ${payload.userId}.`);
+      store.dispatch(getLiveStats(payload));
+    }
+  });
 
 export const fetchUserRequest = () => ({
   type: ActionType.FETCH_USER_REQUEST as typeof ActionType.FETCH_USER_REQUEST
@@ -42,6 +56,7 @@ export const fetchUser = (userId: number): ThunkAction<Promise<IUser>, RootState
       dispatch(fetchUserSuccess(data));
       resolve(data);
     } catch (error) {
+      console.error(error);
       dispatch(fetchUserFailure(error));
       reject(error);
     }

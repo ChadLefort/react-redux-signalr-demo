@@ -9,12 +9,18 @@ enum HubMethod {
 }
 
 export const registerCommands = async (store: Store, cb: () => void) => {
-  hub.on(HubMethod.OnConnected, connectionId => console.log(`${connectionId} has connected to SignalR Hub.`));
-  hub.on(HubMethod.OnDisconnected, connectionId => console.log(`${connectionId} has disconnected from SignalR Hub.`));
+  hub.on(HubMethod.OnConnected, (connectionId: string) => console.log(`${connectionId} has connected to SignalR Hub.`));
+  hub.on(HubMethod.OnDisconnected, (connectionId: string) =>
+    console.log(`${connectionId} has disconnected from SignalR Hub.`)
+  );
 
   userSignalRCommands(store);
   killFeedSignalRCommands(store);
 
-  await hub.start();
-  cb();
+  try {
+    await hub.start();
+    cb();
+  } catch (error) {
+    console.error(error);
+  }
 };

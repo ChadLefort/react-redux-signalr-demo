@@ -10,19 +10,19 @@ namespace ReactReduxSignalRDemo.Hubs
 {
     public class R6StatsHub : Hub
     {
-        private readonly ISimuateMatchService _simuateMatch;
+        private readonly ISimulateMatchService _simulateMatch;
         private readonly ILogger _logger;
 
-        public R6StatsHub(ISimuateMatchService simuateMatch, ILogger<R6StatsHub> logger)
+        public R6StatsHub(ISimulateMatchService simulateMatch, ILogger<R6StatsHub> logger)
         {
-            _simuateMatch = simuateMatch;
+            _simulateMatch = simulateMatch;
             _logger = logger;
         }
 
         public override async Task OnConnectedAsync()
         {
             _logger.LogInformation($"{Context.ConnectionId} has connected to SignalR Hub.");
-            UserHandler.UserList.Add(new SignalRUser {ConnectionId = Context.ConnectionId});
+            UserHandler.UserList.Add(new SignalRUser { ConnectionId = Context.ConnectionId });
 
             await Clients.All.SendAsync("OnConnected", Context.ConnectionId);
             await base.OnConnectedAsync();
@@ -30,7 +30,7 @@ namespace ReactReduxSignalRDemo.Hubs
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
-            _simuateMatch.StopMatch();
+            _simulateMatch.StopMatch();
             _logger.LogInformation($"{Context.ConnectionId} has disconnected from SignalR Hub.");
             UserHandler.UserList.RemoveAll(x => x.ConnectionId == Context.ConnectionId);
 
@@ -40,11 +40,13 @@ namespace ReactReduxSignalRDemo.Hubs
 
         public Task StartFetchMatch(int userId, int matchId)
         {
+            _logger.LogInformation($"Attempting to simulate match for user {userId} and match {matchId}.");
+
             var simulatedMatchAlready = UserHandler.UserList.FirstOrDefault(x => x.SearchedUserId == userId);
 
             if (simulatedMatchAlready == null)
             {
-                _simuateMatch.StartMatch(userId, matchId);
+                _simulateMatch.StartMatch(userId, matchId);
 
                 var connectedUser = UserHandler.UserList.FirstOrDefault(x => x.ConnectionId == Context.ConnectionId);
 

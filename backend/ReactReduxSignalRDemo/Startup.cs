@@ -32,8 +32,8 @@ namespace ReactReduxSignalRDemo
             services.AddDbContext<KillFeedsContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<OperatorsContext>(options => options.UseSqlServer(connection));
             services.AddSingleton(Configuration);
-            services.AddScoped<ISimuateMatchRepository, SimuateMatchRepository>();
-            services.AddScoped<ISimuateMatchService, SimuateMatchService>();
+            services.AddScoped<ISimulateMatchRepository, SimulateMatchRepository>();
+            services.AddScoped<ISimulateMatchService, SimulateMatchService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
