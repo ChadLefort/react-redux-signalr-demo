@@ -1,6 +1,6 @@
 export interface IOperator {
-  operatorId: number;
-  name: string;
-  type: string;
-  icon: string;
+  readonly operatorId: number;
+  readonly name: string;
+  readonly type: string;
+  readonly icon: string;
 }

@@ -2,29 +2,29 @@ import { Attacker } from '../enums/attackers';
 import { Defender } from '../enums/defenders';
 
 export interface IKillFeed {
-  killFeedId: number;
-  matchId: number;
-  userId: number;
-  killFeedItems: IKillFeedItem[];
+  readonly killFeedId: number;
+  readonly matchId: number;
+  readonly userId: number;
+  readonly killFeedItems: IKillFeedItem[];
 }
 
 export interface IKillFeedItem {
-  killFeedItemId: number;
-  killFeedId: number;
-  kill: IKill;
-  death: IDeath;
+  readonly killFeedItemId: number;
+  readonly killFeedId: number;
+  readonly kill: IKill;
+  readonly death: IDeath;
 }
 
 export interface IDeath {
-  deathUserId: number;
-  killFeedItemId: number;
-  username: string;
-  operator: Attacker | Defender;
+  readonly deathUserId: number;
+  readonly killFeedItemId: number;
+  readonly username: string;
+  readonly operator: Attacker | Defender;
 }
 
 export interface IKill {
-  killUserId: number;
-  killFeedItemId: number;
-  username: string;
-  operator: string;
+  readonly killUserId: number;
+  readonly killFeedItemId: number;
+  readonly username: string;
+  readonly operator: string;
 }

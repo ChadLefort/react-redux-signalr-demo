@@ -30,14 +30,13 @@ const styles = () =>
 const KillDeathCard: React.SFC<Props> = ({
   classes,
   user: {
-    username,
     stats: { kills, deaths }
   }
 }) => (
   <Card className={classes.card}>
     <CardContent>
       <Typography gutterBottom variant="headline" component="h2">
-        Kill & Deaths
+        Kill &amp; Deaths
       </Typography>
       <Divider />
       <Grid container>

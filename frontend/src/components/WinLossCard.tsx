@@ -25,14 +25,13 @@ const styles = () =>
 const WinLossCard: React.SFC<Props> = ({
   classes,
   user: {
-    username,
     stats: { wins, losses }
   }
 }) => (
   <Card className={classes.card}>
     <CardContent>
       <Typography gutterBottom variant="headline" component="h2">
-        Wins & Losses
+        Wins &amp; Losses
       </Typography>
       <Divider />
       <Grid container>
