@@ -22,7 +22,8 @@ type OwnProps = {
 const styles = () =>
   createStyles({
     root: {
-      width: '100%'
+      width: '100%',
+      margin: 0
     },
     display1: {
       display: 'flex',
@@ -36,7 +37,7 @@ const styles = () =>
 const UserDashboard: React.SFC<Props> = ({ user, killFeed, operators, classes }) => (
   <React.Fragment>
     <Grid container className={classes.root} justify="center" spacing={16}>
-      <Grid item xs={9}>
+      <Grid item xs={12} md={9}>
         <Typography variant="display1" gutterBottom className={classes.display1}>
           <img src={`${process.env.PUBLIC_URL}/assets/ranks/gold-one.svg`} className={classes.rank} />
           {user.username}

@@ -25,12 +25,7 @@ const styles = () =>
       margin: '1em 0'
     },
     card: {
-      minWidth: 275,
       height: '100%'
-    },
-    item: {
-      paddingLeft: 0,
-      paddingRight: 0
     }
   });
 

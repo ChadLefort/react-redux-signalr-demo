@@ -31,7 +31,7 @@ const KillFeedItem: React.SFC<Props> = ({ kill, death, operators, classes }) => 
   return (
     <React.Fragment>
       <Grid container justify="center" alignItems="center">
-        <Grid item md={5}>
+        <Grid item xs={5}>
           <ListItem disableGutters>
             <Avatar
               alt={killOperator.name}
@@ -41,12 +41,12 @@ const KillFeedItem: React.SFC<Props> = ({ kill, death, operators, classes }) => 
             <ListItemText primary={kill.username} />
           </ListItem>
         </Grid>
-        <Grid item md={2}>
+        <Grid item xs={2}>
           <Avatar>
             <ForwardIcon />
           </Avatar>
         </Grid>
-        <Grid item md={5}>
+        <Grid item xs={5}>
           <ListItem disableGutters>
             <Avatar
               alt={deathOperator.name}

@@ -17,7 +17,6 @@ type OwnProps = {
 const styles = () =>
   createStyles({
     card: {
-      minWidth: 275,
       height: '100%'
     }
   });
